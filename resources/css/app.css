@@ -1,0 +1,33 @@
+/*
+    The Application Style
+*/
+
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fcfcfc;
+}
+
+.website-width {
+    width: 1250px;
+    margin: auto;
+}
+
+a.reset {
+    color: inherit;
+    text-decoration: unset;
+}
+
+@media screen and (max-width: 1250px) {
+    .website-width {
+        width: 95%;
+    }
+}
