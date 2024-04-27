@@ -18,6 +18,15 @@
                 />
             </div>
             <div class="grid py-2">
+                <label class="mb-1" for="email">Email</label>
+                <InputText
+                    id="email"
+                    type="text"
+                    v-model="form.email"
+                    placeholder="Enter employee email"
+                />
+            </div>
+            <div class="grid py-2">
                 <label class="mb-1" for="type">Type</label>
                 <Dropdown
                     v-model="form.type"
@@ -61,6 +70,7 @@ const visible = ref(false);
 
 const form = reactive({
     name: props.model?.name,
+    email: props.model?.email,
     type: props.model?.type,
     is_active: props.model ? props.model.is_active : true,
 });

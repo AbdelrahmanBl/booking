@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\EmployeeType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,9 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string name
  * @property string email
  * @property string password
+ * @property object type
+ * @property string type_text
  * @property bool is_active
  */
-class User extends Authenticatable
+class Employee extends Authenticatable
 {
     use HasApiTokens,
         HasFactory;
@@ -27,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
         'is_active',
     ];
 
@@ -46,6 +49,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'password' => 'hashed',
+        'type' => EmployeeType::class,
         'is_active' => 'boolean',
     ];
+
+    public function getTypeTextAttribute()
+    {
+        return __("enums.EmployeeType.{$this->type->value}");
+    }
 }

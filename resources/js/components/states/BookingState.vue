@@ -14,6 +14,9 @@ const props = defineProps({
 const severity = ref("");
 
 switch (props.value) {
+    case "pending":
+        severity.value = "warning";
+        break;
     case "approved":
         severity.value = "success";
         break;

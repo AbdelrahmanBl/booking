@@ -5,6 +5,7 @@
         </div>
         <DataTable :value="tableData">
             <Column field="name" header="Employee Name"></Column>
+            <Column field="email" header="Employee Email"></Column>
             <Column header="Employee Type">
                 <template #body="slots">
                     <EmployeeTypeState
@@ -59,6 +60,7 @@ const tableData = ref([
     {
         id: 1,
         name: "Employee 1",
+        email: "employee1@gmail.com",
         type: "admin",
         type_text: "Admin",
         is_active: true,
@@ -68,6 +70,7 @@ const tableData = ref([
     {
         id: 2,
         name: "Employee 2",
+        email: "employee2@gmail.com",
         type: "employee",
         type_text: "Employee",
         is_active: false,
