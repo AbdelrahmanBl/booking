@@ -25,7 +25,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import AuthCard from "../../components/card/AuthCard.vue";
+import AuthCard from "../../components/cards/AuthCard.vue";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 

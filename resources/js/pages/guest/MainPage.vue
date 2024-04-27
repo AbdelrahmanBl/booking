@@ -31,7 +31,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import BookingCard from "../../components/card/BookingCard.vue";
+import BookingCard from "../../components/cards/BookingCard.vue";
 import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
 

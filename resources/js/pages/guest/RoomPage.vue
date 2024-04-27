@@ -25,8 +25,12 @@
                     ipsum dolores velit consequuntur libero, hic aperiam!
                 </div>
                 <div class="mb-2">
-                    <Tag value="Signle" severity="info" />
-                    <Tag value="Available" severity="success" class="ml-1" />
+                    <RoomTypeState label="Single" value="single" />
+                    <RoomState
+                        label="Available"
+                        value="available"
+                        class="ml-1"
+                    />
                 </div>
                 <div class="mb-2">
                     <div class="mt-0 font-semibold text-xl">$200</div>
@@ -41,24 +45,15 @@
 
 <script setup>
 import { ref } from "vue";
-import Tag from "primevue/tag";
 import Button from "primevue/button";
 import Galleria from "primevue/galleria";
+import RoomState from "../../components/states/RoomState.vue";
+import RoomTypeState from "../../components/states/RoomTypeState.vue";
 
 const images = ref([
     { src: location.origin + "/" + "booking.png" },
     { src: location.origin + "/" + "booking.png" },
     { src: location.origin + "/" + "booking.png" },
     { src: location.origin + "/" + "booking.png" },
-]);
-const responsiveOptions = ref([
-    {
-        breakpoint: "1300px",
-        numVisible: 4,
-    },
-    {
-        breakpoint: "575px",
-        numVisible: 1,
-    },
 ]);
 </script>

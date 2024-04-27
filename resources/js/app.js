@@ -10,6 +10,9 @@ import PrimeVue from 'primevue/config';
 import App from './App.vue'
 import router from './router'
 
+import ConfirmationService from 'primevue/confirmationservice';
+
+
 // Layouts
 import AdminLayout from './components/layouts/AdminLayout.vue'
 import GuestLayout from './components/layouts/GuestLayout.vue'
@@ -26,5 +29,6 @@ createApp(App)
 })
 .use(router)
 .use(PrimeVue)
+.use(ConfirmationService)
 .mount('#app')
 

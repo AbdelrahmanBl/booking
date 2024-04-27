@@ -41,16 +41,16 @@ const activeIndex = ref(parseInt(localStorage.getItem("activeIndex")) ?? 0);
 const items = ref([
     { label: "Home", icon: "pi pi-home", route: { name: "admin.home" } },
     {
+        label: "Employees",
+        icon: "pi pi-users",
+        route: { name: "admin.employees" },
+    },
+    {
         label: "Rooms",
         icon: "pi pi-list",
         route: { name: "admin.rooms" },
     },
     { label: "Clients", icon: "pi pi-users", route: { name: "admin.clients" } },
-    {
-        label: "Employees",
-        icon: "pi pi-users",
-        route: { name: "admin.employees" },
-    },
     {
         label: "Bookings",
         icon: "pi pi-chart-line",

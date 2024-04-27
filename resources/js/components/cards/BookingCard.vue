@@ -14,9 +14,9 @@
                         alt="Room"
                         class="w-full border-round"
                     />
-                    <Tag
-                        value="Available"
-                        severity="success"
+                    <RoomState
+                        label="Available"
+                        value="available"
                         class="absolute"
                         style="left: 5px; top: 5px"
                     />
@@ -24,7 +24,7 @@
             </div>
             <div class="mb-1 font-medium">Room 1</div>
             <div class="mb-1">
-                <Tag value="Signle" severity="info" />
+                <RoomTypeState label="Single" value="single" />
             </div>
         </router-link>
         <div class="flex justify-between items-center">
@@ -35,6 +35,7 @@
 </template>
 
 <script setup>
-import Tag from "primevue/tag";
 import Button from "primevue/button";
+import RoomTypeState from "../states/RoomTypeState.vue";
+import RoomState from "../states/RoomState.vue";
 </script>
