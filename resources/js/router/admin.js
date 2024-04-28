@@ -8,12 +8,13 @@ import AdminBookingsPage from '../pages/admin/AdminBookingsPage.vue'
 const as = 'admin'
 
 const routes = [
-    { path: `/${as}/login`, component: AdminLoginPage, name: `${as}.login` },
-    { path: `/${as}/home`, component: AdminHomePage, name: `${as}.home` },
-    { path: `/${as}/rooms`, component: AdminRoomsPage, name: `${as}.rooms` },
-    { path: `/${as}/clients`, component: AdminClientsPage, name: `${as}.clients` },
-    { path: `/${as}/employees`, component: AdminEmployeesPage, name: `${as}.employees` },
-    { path: `/${as}/bookings`, component: AdminBookingsPage, name: `${as}.bookings` },
+    { path: `/${as}`, redirect: `/${as}/login` },
+    { path: `/${as}/login`, component: AdminLoginPage, name: `${as}.login`, meta: { auth: false } },
+    { path: `/${as}/home`, component: AdminHomePage, name: `${as}.home`, meta: { auth: true } },
+    { path: `/${as}/rooms`, component: AdminRoomsPage, name: `${as}.rooms`, meta: { auth: true } },
+    { path: `/${as}/clients`, component: AdminClientsPage, name: `${as}.clients`, meta: { auth: true } },
+    { path: `/${as}/employees`, component: AdminEmployeesPage, name: `${as}.employees`, meta: { auth: true } },
+    { path: `/${as}/bookings`, component: AdminBookingsPage, name: `${as}.bookings`, meta: { auth: true } },
 ]
 
 export default routes

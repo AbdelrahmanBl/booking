@@ -1,27 +1,25 @@
-function setAuthUser(data) {
-    localStorage.setItem('authUser', JSON.stringify(data))
-}
+const setAuthUser = (data) => localStorage.setItem('authUser', JSON.stringify(data))
 
 function getAuthUser() {
     const user = localStorage.getItem('authUser')
     return user ? JSON.parse(user) : null
 }
 
-function setAccessToken(token) {
-    localStorage.setItem('accessToken', token)
-}
+const setAccessToken = (token) => localStorage.setItem('accessToken', token)
 
-function getAccessToken() {
-    return localStorage.getItem('accessToken')
-}
+const getAccessToken = ()  => localStorage.getItem('accessToken')
 
-function isAuthUser() {
-    return !! getAuthUser()
-}
+const isAuthUser = () => !! getAuthUser()
 
-function isGuestUser() {
-    return ! isAuthUser()
-}
+const isGuestUser = () => ! isAuthUser()
+
+const isAuthAdmin = () => getAuthUser()?.type === 'admin'
+
+const isAuthEmployee = () => getAuthUser()?.type === 'employee'
+
+const isAuthAdminOrEmployee = () => isAuthAdmin() || isAuthEmployee()
+
+const isAuthClient = () => getAuthUser()?.type === 'client'
 
 function logout() {
     if(isAuthUser()) {
@@ -37,5 +35,9 @@ export default {
     getAccessToken,
     isAuthUser,
     isGuestUser,
+    isAuthAdmin,
+    isAuthEmployee,
+    isAuthClient,
+    isAuthAdminOrEmployee,
     logout,
 }

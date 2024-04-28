@@ -8,7 +8,7 @@
             />
         </div>
         <div class="flex justify-center m-auto">
-            <div>
+            <div class="md:mt-0 mt-8">
                 <div class="text-2xl font-bold py-1">{{ title }}</div>
                 <div class="text-base text-slate-700 py-1">
                     {{ description }}

@@ -29,9 +29,6 @@ import AuthCard from "../../components/cards/AuthCard.vue";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import AdminAuthService from "../../services/admin/AdminAuthService";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
 
 const loginLoading = ref(false);
 const form = reactive({
@@ -42,7 +39,7 @@ const form = reactive({
 const login = () => {
     loginLoading.value = true;
     AdminAuthService.login(form)
-        .then(() => router.push({ name: "admin.home" }))
+        .then(() => location.reload())
         .finally(() => (loginLoading.value = false));
 };
 </script>

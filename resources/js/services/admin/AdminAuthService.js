@@ -14,7 +14,9 @@ async function login(data) {
 
 async function logout() {
     return RequestHelper.get('admin/logout')
-    .then(() => AuthHelper.logout())
+    .then(() => {
+        AuthHelper.logout()
+    })
 }
 
 export default {
