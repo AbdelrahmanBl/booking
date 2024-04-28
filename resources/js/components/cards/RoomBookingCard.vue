@@ -29,7 +29,12 @@
         </router-link>
         <div class="flex justify-between items-center">
             <div class="mt-0 font-semibold text-xl">{{ room.price_text }}</div>
-            <Button type="button" icon="pi pi-book" @click="book" />
+            <Button
+                type="button"
+                icon="pi pi-book"
+                :loading="bookingLoading"
+                @click="book"
+            />
         </div>
     </div>
 </template>
@@ -40,17 +45,26 @@ import RoomTypeState from "../states/RoomTypeState.vue";
 import RoomState from "../states/RoomState.vue";
 import AuthHelper from "../../helpers/AuthHelper";
 import { useRouter } from "vue-router";
+import ClientBookingService from "../../services/client/ClientBookingService";
+import { ref } from "vue";
 
 const props = defineProps({
     room: Object,
 });
 
 const router = useRouter();
+const bookingLoading = ref(false);
 
 function book() {
     if (!AuthHelper.isAuthClient()) {
         router.push({ name: "client.login" });
         return;
     }
+
+    bookingLoading.value = true;
+
+    ClientBookingService.createBooking({ room_id: props.room.id }).finally(
+        () => (bookingLoading.value = false)
+    );
 }
 </script>

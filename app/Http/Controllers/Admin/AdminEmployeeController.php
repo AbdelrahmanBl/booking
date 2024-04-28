@@ -16,7 +16,7 @@ class AdminEmployeeController extends Controller
     {
         return $this->successResponse([
             'employeeTypeOptions' => EmployeeType::options(),
-            'tableData' => Employee::all(),
+            'tableData' => Employee::query()->latest('id')->get(),
         ]);
     }
 

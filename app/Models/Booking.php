@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property object room
  * @property object status
  * @property string status_text
+ * @property string booking_number
  */
 class Booking extends Model
 {
@@ -39,6 +40,16 @@ class Booking extends Model
      */
     protected $casts = [
         'status' => BookingStatus::class,
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'status_text',
+        'booking_number',
     ];
 
     public function getStatusTextAttribute()

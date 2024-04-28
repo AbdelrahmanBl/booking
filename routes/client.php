@@ -12,5 +12,6 @@ Route::post('register', Client\ClientRegisterController::class)->name('register'
 
 Route::middleware(['auth:sanctum', 'ability:client'])->group(function() {
     Route::any('logout', LogoutController::class)->name('logout');
+    Route::resource('bookings', Client\ClientBookingController::class)->only(['index', 'store']);
 });
 

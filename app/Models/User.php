@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Traits\TimestampsFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -15,6 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string password
  * @property bool is_active
  * @property string type
+ * @property object bookings
  */
 class User extends Authenticatable
 {
@@ -65,5 +67,15 @@ class User extends Authenticatable
     public function getTypeAttribute()
     {
         return 'client';
+    }
+
+    /**
+     * Get all of the bookings for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
     }
 }

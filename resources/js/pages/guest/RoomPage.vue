@@ -32,6 +32,7 @@
                         type="button"
                         icon="pi pi-book"
                         label="Book"
+                        :loading="bookingLoading"
                         @click="book"
                     />
                 </div>
@@ -48,16 +49,24 @@ import RoomTypeState from "../../components/states/RoomTypeState.vue";
 import ClientMainPageService from "../../services/client/ClientMainPageService";
 import { useRoute, useRouter } from "vue-router";
 import AuthHelper from "../../helpers/AuthHelper";
+import ClientBookingService from "../../services/client/ClientBookingService";
 
 const route = useRoute();
 const router = useRouter();
 const room = ref(null);
+const bookingLoading = ref(false);
 
 function book() {
     if (!AuthHelper.isAuthClient()) {
         router.push({ name: "client.login" });
         return;
     }
+
+    bookingLoading.value = true;
+
+    ClientBookingService.createBooking({ room_id: room.value.id }).finally(
+        () => (bookingLoading.value = false)
+    );
 }
 
 onMounted(() => {

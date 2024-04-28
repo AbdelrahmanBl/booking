@@ -16,7 +16,10 @@ class AdminBookingController extends Controller
     {
         return $this->successResponse([
             'tableData' => AdminBookingResource::collection(
-                Booking::query()->with(['user', 'room'])->get()
+                Booking::query()
+                ->with(['user', 'room'])
+                ->latest('id')
+                ->get()
             ),
         ]);
     }

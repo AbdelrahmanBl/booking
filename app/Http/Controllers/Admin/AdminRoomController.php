@@ -18,7 +18,7 @@ class AdminRoomController extends Controller
         return $this->successResponse([
             'roomTypeOptions' => RoomType::options(),
             'roomStatusOptions' => RoomStatus::options(),
-            'tableData' => Room::all(),
+            'tableData' => Room::query()->latest('id')->get(),
         ]);
     }
 

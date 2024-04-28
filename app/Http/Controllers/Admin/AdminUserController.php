@@ -14,7 +14,7 @@ class AdminUserController extends Controller
     public function index()
     {
         return $this->successResponse([
-            'tableData' => User::all(),
+            'tableData' => User::query()->latest('id')->get(),
         ]);
     }
 
