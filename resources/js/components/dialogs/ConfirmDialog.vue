@@ -13,8 +13,9 @@ import { ref, computed } from "vue";
 import Button from "primevue/button";
 import { useConfirm } from "primevue/useconfirm";
 import ConfirmDialog from "primevue/confirmdialog";
+import AdminBookingService from "../../services/admin/AdminBookingService";
 
-const emits = defineEmits(["accept"]);
+const emits = defineEmits(["update"]);
 
 const props = defineProps({
     id: Number,
@@ -51,7 +52,13 @@ const handleConfirm = () => {
         accept: () => {
             // handle confirm record...
             loading.value = true;
-            emits("accept");
+            AdminBookingService.updateRecord(props.id, {
+                status: props.type === "approve" ? "approved" : "rejected",
+            })
+                .then((data) => {
+                    emits("update", data);
+                })
+                .finally(() => (loading.value = false));
         },
     });
 };

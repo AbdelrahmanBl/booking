@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\BookingStatus;
+use App\Traits\TimestampsFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Booking extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        TimestampsFormat;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +44,11 @@ class Booking extends Model
     public function getStatusTextAttribute()
     {
         return __("enums.BookingStatus.{$this->status->value}");
+    }
+
+    public function getBookingNumberAttribute()
+    {
+        return '#BOK-' . $this->id;
     }
 
     /**

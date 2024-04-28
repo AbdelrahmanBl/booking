@@ -45,11 +45,13 @@
                             :id="slots.data.id"
                             :label="slots.data.booking_number"
                             type="approve"
+                            @update="handleUpdate"
                         />
                         <ConfirmDialog
                             :id="slots.data.id"
                             :label="slots.data.booking_number"
                             type="reject"
+                            @update="handleUpdate"
                         />
                     </div>
                 </template>
@@ -59,54 +61,27 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ConfirmDialog from "../../components/dialogs/ConfirmDialog.vue";
 import BookingState from "../../components/states/BookingState.vue";
 import RoomState from "../../components/states/RoomState.vue";
 import RoomTypeState from "../../components/states/RoomTypeState.vue";
+import AdminBookingService from "../../services/admin/AdminBookingService";
 
-const tableData = ref([
-    {
-        id: 1,
-        booking_number: "#BOK-1",
-        client: {
-            id: 1,
-            name: "Client 1",
-        },
-        room: {
-            id: 1,
-            name: "Room 1",
-            type: "single",
-            type_text: "Single",
-            status: "available",
-            status_text: "Available",
-        },
-        status: "approved",
-        status_text: "Approved",
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-    {
-        id: 2,
-        booking_number: "#BOK-2",
-        client: {
-            id: 2,
-            name: "Client 2",
-        },
-        room: {
-            id: 2,
-            name: "Room 2",
-            type: "single",
-            type_text: "Single",
-            status: "available",
-            status_text: "Available",
-        },
-        status: "rejected",
-        status_text: "Rejected",
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-]);
+const tableData = ref([]);
+
+const handleUpdate = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value[index] = data;
+};
+
+onMounted(() => {
+    AdminBookingService.getTableData().then((data) => {
+        tableData.value = data.tableData;
+    });
+});
 </script>
