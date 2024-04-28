@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminLogoutController extends Controller
+class LogoutController extends Controller
 {
     /**
      * Handle the incoming request.

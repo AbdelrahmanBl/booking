@@ -25,7 +25,23 @@ async function post(route, data)
     .catch(result => ResponseHelper.handleErrorResponse(result))
 }
 
+async function patch(route, data)
+{
+    return axios.patch(`${domain}/${route}`, data, config)
+    .then(result =>  ResponseHelper.handleSuccessResponse(result))
+    .catch(result => ResponseHelper.handleErrorResponse(result))
+}
+
+async function destroy(route)
+{
+    return axios.delete(`${domain}/${route}`, config)
+    .then(result =>  ResponseHelper.handleSuccessResponse(result))
+    .catch(result => ResponseHelper.handleErrorResponse(result))
+}
+
 export default {
     get,
     post,
+    patch,
+    destroy,
 }

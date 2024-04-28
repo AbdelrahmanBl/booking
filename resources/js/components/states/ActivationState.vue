@@ -3,24 +3,28 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 import Tag from "primevue/tag";
 
 const props = defineProps({
     value: Boolean,
 });
 
-const severity = ref("");
-const label = ref("");
+const label = computed(() => {
+    switch (props.value) {
+        case true:
+            return (label.value = "Active");
+        case false:
+            return (label.value = "Not Active");
+    }
+});
 
-switch (props.value) {
-    case true:
-        severity.value = "success";
-        label.value = "Active";
-        break;
-    case false:
-        severity.value = "danger";
-        label.value = "Not Active";
-        break;
-}
+const severity = computed(() => {
+    switch (props.value) {
+        case true:
+            return (severity.value = "success");
+        case false:
+            return (severity.value = "danger");
+    }
+});
 </script>

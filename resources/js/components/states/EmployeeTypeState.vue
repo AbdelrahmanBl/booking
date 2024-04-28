@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 import Tag from "primevue/tag";
 
 const props = defineProps({
@@ -11,14 +11,12 @@ const props = defineProps({
     value: String,
 });
 
-const severity = ref("");
-
-switch (props.value) {
-    case "admin":
-        severity.value = "success";
-        break;
-    case "employee":
-        severity.value = "warning";
-        break;
-}
+const severity = computed(() => {
+    switch (props.value) {
+        case "admin":
+            return (severity.value = "success");
+        case "employee":
+            return (severity.value = "warning");
+    }
+});
 </script>

@@ -27,6 +27,26 @@
                 />
             </div>
             <div class="grid py-2">
+                <label class="mb-1" for="password">Password</label>
+                <InputText
+                    id="password"
+                    type="text"
+                    v-model="form.password"
+                    placeholder="Enter employee password"
+                />
+            </div>
+            <div class="grid py-2">
+                <label class="mb-1" for="password_confirmation">
+                    Password Confirmation
+                </label>
+                <InputText
+                    id="password_confirmation"
+                    type="text"
+                    v-model="form.password_confirmation"
+                    placeholder="Enter employee password_confirmation"
+                />
+            </div>
+            <div class="grid py-2">
                 <label class="mb-1" for="type">Type</label>
                 <Dropdown
                     v-model="form.type"
@@ -60,6 +80,9 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import InputSwitch from "primevue/inputswitch";
 import Dropdown from "primevue/dropdown";
+import AdminEmployeeService from "../../services/admin/AdminEmployeeService";
+
+const emits = defineEmits(["create", "update"]);
 
 const props = defineProps({
     model: Object,
@@ -71,6 +94,8 @@ const visible = ref(false);
 const form = reactive({
     name: props.model?.name,
     email: props.model?.email,
+    password: null,
+    password_confirmation: null,
     type: props.model?.type,
     is_active: props.model ? props.model.is_active : true,
 });
@@ -85,7 +110,16 @@ const dialogHeader = computed(() =>
 );
 
 const submit = () => {
-    // ...
-    visible.value = false;
+    isEdit.value
+        ? AdminEmployeeService.updateRecord(props.model.id, form).then(
+              (data) => {
+                  emits("update", data);
+                  visible.value = false;
+              }
+          )
+        : AdminEmployeeService.createRecord(form).then((data) => {
+              emits("create", data);
+              visible.value = false;
+          });
 };
 </script>

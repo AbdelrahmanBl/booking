@@ -1,9 +1,12 @@
 <template>
     <AdminLayout>
         <div>
-            <EmployeeForm :employee-type-options="employeeTypeOptions" />
+            <EmployeeForm
+                :employee-type-options="employeeTypeOptions"
+                @create="handleCreate"
+            />
         </div>
-        <DataTable :value="tableData">
+        <DataTable class="mt-4" :value="tableData">
             <Column field="name" header="Employee Name"></Column>
             <Column field="email" header="Employee Email"></Column>
             <Column header="Employee Type">
@@ -35,10 +38,13 @@
                         <EmployeeForm
                             :model="slots.data"
                             :employee-type-options="employeeTypeOptions"
+                            @update="handleUpdate"
                         />
                         <DeleteDialog
                             :id="slots.data.id"
                             :label="slots.data.name"
+                            :route="`admin/employees/${slots.data.id}`"
+                            @destory="handleDelete(slots.data)"
                         />
                     </div>
                 </template>
@@ -48,36 +54,38 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import EmployeeTypeState from "../../components/states/EmployeeTypeState.vue";
 import EmployeeForm from "../../components/forms/EmployeeForm.vue";
 import DeleteDialog from "../../components/dialogs/DeleteDialog.vue";
 import ActivationState from "../../components/states/ActivationState.vue";
+import AdminEmployeeService from "../../services/admin/AdminEmployeeService";
 
-const tableData = ref([
-    {
-        id: 1,
-        name: "Employee 1",
-        email: "employee1@gmail.com",
-        type: "admin",
-        type_text: "Admin",
-        is_active: true,
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-    {
-        id: 2,
-        name: "Employee 2",
-        email: "employee2@gmail.com",
-        type: "employee",
-        type_text: "Employee",
-        is_active: false,
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-]);
+const employeeTypeOptions = ref([]);
+const tableData = ref([]);
 
-const employeeTypeOptions = ref([{ label: "Admin ", value: "admin" }]);
+const handleCreate = (data) => tableData.value.push(data);
+
+const handleUpdate = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value[index] = data;
+};
+
+const handleDelete = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value.splice(index, 1);
+};
+
+onMounted(() => {
+    AdminEmployeeService.getTableData().then((data) => {
+        employeeTypeOptions.value = data.employeeTypeOptions;
+        tableData.value = data.tableData;
+    });
+});
 </script>

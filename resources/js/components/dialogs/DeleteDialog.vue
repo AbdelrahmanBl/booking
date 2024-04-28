@@ -13,12 +13,14 @@ import { ref } from "vue";
 import Button from "primevue/button";
 import { useConfirm } from "primevue/useconfirm";
 import ConfirmDialog from "primevue/confirmdialog";
+import RequestHelper from "../../helpers/RequestHelper";
 
-const emits = defineEmits(["accept"]);
+const emits = defineEmits(["destory"]);
 
 const props = defineProps({
     id: Number,
     label: String,
+    route: String,
 });
 
 const confirm = useConfirm();
@@ -40,7 +42,9 @@ const handleConfirm = () => {
         accept: () => {
             // handle delete record...
             loading.value = true;
-            emits("accept");
+            RequestHelper.destroy(props.route)
+                .then(() => emits("destory"))
+                .finally(() => (loading.value = false));
         },
     });
 };
