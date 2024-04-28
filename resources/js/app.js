@@ -10,7 +10,9 @@ import PrimeVue from 'primevue/config';
 import App from './App.vue'
 import router from './router'
 
+// Services
 import ConfirmationService from 'primevue/confirmationservice';
+import ToastService from 'primevue/toastservice';
 
 
 // Layouts
@@ -30,5 +32,6 @@ createApp(App)
 .use(router)
 .use(PrimeVue)
 .use(ConfirmationService)
+.use(ToastService)
 .mount('#app')
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EmployeeType;
+use App\Traits\TimestampsFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,7 +19,10 @@ use Laravel\Sanctum\HasApiTokens;
 class Employee extends Authenticatable
 {
     use HasApiTokens,
-        HasFactory;
+        HasFactory,
+        TimestampsFormat;
+
+    const SUPER_ADMIN_EMAIL = 'admin@booking.com';
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +55,15 @@ class Employee extends Authenticatable
         'password' => 'hashed',
         'type' => EmployeeType::class,
         'is_active' => 'boolean',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'type_text',
     ];
 
     public function getTypeTextAttribute()

@@ -33,9 +33,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import TabMenu from "primevue/tabmenu";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import AdminAuthService from "../../services/admin/AdminAuthService";
 
 const route = new useRoute();
+const router = new useRouter();
 const activeIndex = ref(parseInt(localStorage.getItem("activeIndex")) ?? 0);
 
 const items = ref([
@@ -69,6 +71,7 @@ onMounted(() => {
 });
 
 const logout = () => {
-    // ...
+    AdminAuthService.logout();
+    router.push({ name: "admin.login" });
 };
 </script>

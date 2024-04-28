@@ -17,24 +17,32 @@
                 />
             </div>
             <div class="grid py-2">
-                <Button label="Login" :loading="true" />
+                <Button type="submit" label="Login" :loading="loginLoading" />
             </div>
         </form>
     </AuthCard>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import AuthCard from "../../components/cards/AuthCard.vue";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
+import AdminAuthService from "../../services/admin/AdminAuthService";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+
+const loginLoading = ref(false);
 const form = reactive({
     email: null,
     password: null,
 });
 
 const login = () => {
-    // ...
+    loginLoading.value = true;
+    AdminAuthService.login(form)
+        .then(() => router.push({ name: "admin.home" }))
+        .finally(() => (loginLoading.value = false));
 };
 </script>
