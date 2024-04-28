@@ -4,8 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c491b8531eec05ba41a11d9276a5749",
+    "content-hash": "b6bad9542127b2bc4d7d8308518f3a30",
     "packages": [
+        {
+            "name": "abdelrahmanbl/laravel-uploadable",
+            "version": "4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AbdelrahmanBl/laravel-uploadable.git",
+                "reference": "6a5773e7695537f6229ab43486a50eae118b7386"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AbdelrahmanBl/laravel-uploadable/zipball/6a5773e7695537f6229ab43486a50eae118b7386",
+                "reference": "6a5773e7695537f6229ab43486a50eae118b7386",
+                "shasum": ""
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Bl\\LaravelUploadable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Abdelrahman Bl",
+                    "email": "abdelrahmangamal990@gmail.com"
+                }
+            ],
+            "description": "this package adding behaviour to a model for self uploading images like avatar or any files type.",
+            "support": {
+                "issues": "https://github.com/AbdelrahmanBl/laravel-uploadable/issues",
+                "source": "https://github.com/AbdelrahmanBl/laravel-uploadable/tree/4.0"
+            },
+            "time": "2024-02-05T22:42:18+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -8134,5 +8168,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

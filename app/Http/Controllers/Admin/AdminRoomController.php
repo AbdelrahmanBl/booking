@@ -29,7 +29,7 @@ class AdminRoomController extends Controller
     {
         $room = Room::query()->create($request->validated());
 
-        return $this->successResponse($room->toArray(), __('messages.created'));
+        return $this->successResponse($room->refresh()->toArray(), __('messages.created'));
     }
 
     /**
@@ -47,7 +47,7 @@ class AdminRoomController extends Controller
     {
         $room->update($request->validated());
 
-        return $this->successResponse($room->toArray(), __('messages.updated'));
+        return $this->successResponse($room->refresh()->toArray(), __('messages.updated'));
     }
 
     /**

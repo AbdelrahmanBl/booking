@@ -9,8 +9,23 @@
             />
         </div>
         <DataTable :value="tableData">
+            <Column header="Room Image">
+                <template #body="slots">
+                    <img
+                        height="60"
+                        width="60"
+                        :src="slots.data.image"
+                        alt="Room"
+                    />
+                </template>
+            </Column>
             <Column field="name" header="Room Name"></Column>
             <Column field="description" header="Description"></Column>
+            <Column
+                class="whitespace-nowrap"
+                field="price_text"
+                header="Price"
+            ></Column>
             <Column header="Room Type">
                 <template #body="slots">
                     <RoomTypeState

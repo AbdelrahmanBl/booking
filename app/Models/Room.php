@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Builders\RoomBuilder;
 use App\Enums\RoomStatus;
 use App\Enums\RoomType;
 use App\Traits\TimestampsFormat;
+use Bl\LaravelUploadable\Casts\FileCast;
+use Bl\LaravelUploadable\Traits\FileCastRemover;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,11 +18,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property string type_text
  * @property object status
  * @property string status_text
+ * @property double price
+ * @property string price_text
+ * @property string image
  */
 class Room extends Model
 {
     use HasFactory,
-        TimestampsFormat;
+        TimestampsFormat,
+        FileCastRemover;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +38,8 @@ class Room extends Model
         'description',
         'type',
         'status',
+        'price',
+        'image',
     ];
 
     /**
@@ -41,6 +50,8 @@ class Room extends Model
     protected $casts = [
         'type' => RoomType::class,
         'status' => RoomStatus::class,
+        'price' => 'double',
+        'image' => FileCast::class,
     ];
 
     /**
@@ -51,6 +62,7 @@ class Room extends Model
     protected $appends = [
         'type_text',
         'status_text',
+        'price_text',
     ];
 
     public function getTypeTextAttribute()
@@ -61,5 +73,31 @@ class Room extends Model
     public function getStatusTextAttribute()
     {
         return __("enums.RoomStatus.{$this->status->value}");
+    }
+
+    public function getPriceTextAttribute()
+    {
+        return $this->price . ' SAR';
+    }
+
+    /**
+     * Scope a query to only include available
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAvailable($query)
+    {
+        return $query->where('status', 'available');
+    }
+
+    public static function query(): RoomBuilder
+    {
+        return parent::query();
+    }
+
+    public function newEloquentBuilder($query): RoomBuilder
+    {
+        return new RoomBuilder($query);
     }
 }

@@ -10,26 +10,26 @@
             <div class="mb-3">
                 <div class="relative mx-auto">
                     <img
-                        :src="'https://primefaces.org/cdn/primevue/images/product/bamboo-watch.jpg'"
+                        :src="room.image"
                         alt="Room"
-                        class="w-full border-round"
+                        class="w-full border-round h-44"
                     />
                     <RoomState
-                        label="Available"
-                        value="available"
+                        :label="room.status_text"
+                        :value="room.status"
                         class="absolute"
                         style="left: 5px; top: 5px"
                     />
                 </div>
             </div>
-            <div class="mb-1 font-medium">Room 1</div>
+            <div class="mb-1 font-medium">{{ room.name }}</div>
             <div class="mb-1">
-                <RoomTypeState label="Single" value="single" />
+                <RoomTypeState :label="room.type_text" :value="room.type" />
             </div>
         </router-link>
         <div class="flex justify-between items-center">
-            <div class="mt-0 font-semibold text-xl">$200</div>
-            <Button icon="pi pi-book" />
+            <div class="mt-0 font-semibold text-xl">{{ room.price_text }}</div>
+            <Button type="button" icon="pi pi-book" @click="book" />
         </div>
     </div>
 </template>
@@ -38,4 +38,19 @@
 import Button from "primevue/button";
 import RoomTypeState from "../states/RoomTypeState.vue";
 import RoomState from "../states/RoomState.vue";
+import AuthHelper from "../../helpers/AuthHelper";
+import { useRouter } from "vue-router";
+
+const props = defineProps({
+    room: Object,
+});
+
+const router = useRouter();
+
+function book() {
+    if (!AuthHelper.isAuthClient()) {
+        router.push({ name: "client.login" });
+        return;
+    }
+}
 </script>

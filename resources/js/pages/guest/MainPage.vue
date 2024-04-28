@@ -14,29 +14,53 @@
                     class="md:w-auto w-full my-1"
                 />
                 <Dropdown
-                    v-model="filters.room_type"
-                    :options="[{ label: 'Signle ', value: 'signle' }]"
+                    v-model="filters.type"
+                    :options="roomTypeOptions"
                     option-label="label"
                     option-value="value"
                     placeholder="Select room type"
                     class="md:ml-2 ml-0 md:w-auto w-full my-1"
+                    showClear
                 />
             </div>
-            <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1">
-                <BookingCard v-for="i in 10" />
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-2">
+                <RoomBookingCard
+                    v-for="room in rooms"
+                    :key="room.id"
+                    :room="room"
+                />
             </div>
         </div>
     </GuestLayout>
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import BookingCard from "../../components/cards/BookingCard.vue";
+import { ref, reactive, onMounted, watch } from "vue";
+import RoomBookingCard from "../../components/cards/RoomBookingCard.vue";
 import Dropdown from "primevue/dropdown";
 import InputText from "primevue/inputtext";
+import ClientMainPageService from "../../services/client/ClientMainPageService";
+import debounce from "lodash/debounce";
 
 const filters = reactive({
     search: null,
-    room_type: null,
+    type: null,
 });
+
+const rooms = ref([]);
+const roomTypeOptions = ref([]);
+
+onMounted(() => loadRooms());
+
+watch(
+    filters,
+    debounce(() => loadRooms(), 1000)
+);
+
+function loadRooms() {
+    ClientMainPageService.getPageData(filters).then((data) => {
+        roomTypeOptions.value = data.roomTypeOptions;
+        rooms.value = data.rooms;
+    });
+}
 </script>

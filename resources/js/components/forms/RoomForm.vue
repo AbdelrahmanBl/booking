@@ -47,6 +47,19 @@
                     placeholder="Select room status"
                 />
             </div>
+            <div class="grid py-2">
+                <label class="mb-1" for="price">Price</label>
+                <InputText
+                    id="price"
+                    type="text"
+                    v-model="form.price"
+                    placeholder="Enter room price"
+                />
+            </div>
+            <div class="grid py-2">
+                <label class="mb-1" for="image">Image</label>
+                <InputText id="image" type="file" @change="base64Encoder" />
+            </div>
             <div class="flex justify-content-end gap-2">
                 <Button
                     type="button"
@@ -84,6 +97,8 @@ const form = reactive({
     description: props.model?.description,
     type: props.model?.type,
     status: props.model?.status,
+    price: props.model?.price,
+    image: null,
 });
 
 const isEdit = computed(() => !!props.model);
@@ -94,6 +109,21 @@ const buttonIcon = computed(() =>
 const dialogHeader = computed(() =>
     isEdit.value ? `Edit - ${props.model.name}` : "Add new"
 );
+
+const base64Encoder = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image")) {
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            const base64String = reader.result.split(",")[1]; // Get rid of the "data:image/jpeg;base64," part
+            console.log(base64String); // You can use this Base64 string as needed
+            form.image = base64String;
+        };
+
+        reader.readAsDataURL(file);
+    }
+};
 
 const submit = () => {
     isEdit.value
