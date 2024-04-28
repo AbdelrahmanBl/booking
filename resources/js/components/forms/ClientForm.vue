@@ -27,6 +27,26 @@
                 />
             </div>
             <div class="grid py-2">
+                <label class="mb-1" for="password">Password</label>
+                <InputText
+                    id="password"
+                    type="password"
+                    v-model="form.password"
+                    placeholder="Enter client password"
+                />
+            </div>
+            <div class="grid py-2">
+                <label class="mb-1" for="password_confirmation">
+                    Password Confirmation
+                </label>
+                <InputText
+                    id="password_confirmation"
+                    type="password"
+                    v-model="form.password_confirmation"
+                    placeholder="Enter client password_confirmation"
+                />
+            </div>
+            <div class="grid py-2">
                 <label class="mb-1" for="status">Activation</label>
                 <InputSwitch v-model="form.is_active" />
             </div>
@@ -49,6 +69,9 @@ import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import InputSwitch from "primevue/inputswitch";
+import AdminClientService from "../../services/admin/AdminClientService";
+
+const emits = defineEmits(["create", "update"]);
 
 const props = defineProps({
     model: Object,
@@ -59,6 +82,8 @@ const visible = ref(false);
 const form = reactive({
     name: props.model?.name,
     email: props.model?.email,
+    password: null,
+    password_confirmation: null,
     is_active: props.model ? props.model.is_active : true,
 });
 
@@ -72,7 +97,16 @@ const dialogHeader = computed(() =>
 );
 
 const submit = () => {
-    // ...
-    visible.value = false;
+    isEdit.value
+        ? AdminClientService.updateRecord(props.model.id, form).then((data) => {
+              form.password = null;
+              form.password_confirmation = null;
+              emits("update", data);
+              visible.value = false;
+          })
+        : AdminClientService.createRecord(form).then((data) => {
+              emits("create", data);
+              visible.value = false;
+          });
 };
 </script>

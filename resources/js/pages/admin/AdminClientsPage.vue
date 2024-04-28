@@ -1,7 +1,7 @@
 <template>
     <AdminLayout>
         <div>
-            <ClientForm />
+            <ClientForm :key="createFormKey" @create="handleCreate" />
         </div>
         <DataTable :value="tableData">
             <Column field="name" header="Client Name"></Column>
@@ -24,10 +24,15 @@
             <Column header="Options">
                 <template #body="slots">
                     <div class="flex gap-2">
-                        <ClientForm :model="slots.data" />
+                        <ClientForm
+                            :model="slots.data"
+                            @update="handleUpdate"
+                        />
                         <DeleteDialog
                             :id="slots.data.id"
                             :label="slots.data.name"
+                            :route="`admin/users/${slots.data.id}`"
+                            @destroy="handleDelete(slots.data)"
                         />
                     </div>
                 </template>
@@ -37,29 +42,39 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ClientForm from "../../components/forms/ClientForm.vue";
 import DeleteDialog from "../../components/dialogs/DeleteDialog.vue";
 import ActivationState from "../../components/states/ActivationState.vue";
+import AdminClientService from "../../services/admin/AdminClientService";
 
-const tableData = ref([
-    {
-        id: 1,
-        name: "Client 1",
-        email: "client1@gmail.com",
-        is_active: true,
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-    {
-        id: 2,
-        name: "Client 2",
-        email: "client2@gmail.com",
-        is_active: true,
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-]);
+const tableData = ref([]);
+const createFormKey = ref(0);
+
+const handleCreate = (data) => {
+    tableData.value.push(data);
+    createFormKey.value++;
+};
+
+const handleUpdate = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value[index] = data;
+};
+
+const handleDelete = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value.splice(index, 1);
+};
+
+onMounted(() => {
+    AdminClientService.getTableData().then((data) => {
+        tableData.value = data.tableData;
+    });
+});
 </script>

@@ -7,7 +7,7 @@
                 @create="handleCreate"
             />
         </div>
-        <DataTable class="mt-4" :value="tableData">
+        <DataTable :value="tableData">
             <Column field="name" header="Employee Name"></Column>
             <Column field="email" header="Employee Email"></Column>
             <Column header="Employee Type">
