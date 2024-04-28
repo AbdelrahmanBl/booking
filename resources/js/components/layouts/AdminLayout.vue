@@ -35,6 +35,7 @@ import { ref, onMounted } from "vue";
 import TabMenu from "primevue/tabmenu";
 import { useRoute, useRouter } from "vue-router";
 import AdminAuthService from "../../services/admin/AdminAuthService";
+import AuthHelper from "../../helpers/AuthHelper";
 
 const route = useRoute();
 const router = useRouter();
@@ -60,6 +61,11 @@ const items = ref([
     },
     { label: "Logout", icon: "pi pi-sign-out", logout: true },
 ]);
+
+if (AuthHelper.isAuthEmployee()) {
+    items.value.splice(1, 1);
+    items.value.splice(2, 1);
+}
 
 onMounted(() => {
     items.value.forEach((item, index) => {

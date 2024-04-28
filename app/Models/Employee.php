@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property object type
  * @property string type_text
  * @property bool is_active
+ * @property bool is_admin
  */
 class Employee extends Authenticatable
 {
@@ -69,5 +70,10 @@ class Employee extends Authenticatable
     public function getTypeTextAttribute()
     {
         return __("enums.EmployeeType.{$this->type->value}");
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->type === EmployeeType::ADMIN;
     }
 }
