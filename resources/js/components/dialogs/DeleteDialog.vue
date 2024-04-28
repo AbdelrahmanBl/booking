@@ -15,7 +15,7 @@ import { useConfirm } from "primevue/useconfirm";
 import ConfirmDialog from "primevue/confirmdialog";
 import RequestHelper from "../../helpers/RequestHelper";
 
-const emits = defineEmits(["destory"]);
+const emits = defineEmits(["destroy"]);
 
 const props = defineProps({
     id: Number,
@@ -43,7 +43,7 @@ const handleConfirm = () => {
             // handle delete record...
             loading.value = true;
             RequestHelper.destroy(props.route)
-                .then(() => emits("destory"))
+                .then(() => emits("destroy"))
                 .finally(() => (loading.value = false));
         },
     });

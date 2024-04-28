@@ -14,11 +14,11 @@ const props = defineProps({
 const severity = computed(() => {
     switch (props.value) {
         case "pending":
-            return (severity.value = "warning");
+            return "warning";
         case "approved":
-            return (severity.value = "success");
+            return "success";
         case "rejected":
-            return (severity.value = "danger");
+            return "danger";
     }
 });
 </script>

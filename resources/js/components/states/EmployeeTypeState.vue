@@ -14,9 +14,9 @@ const props = defineProps({
 const severity = computed(() => {
     switch (props.value) {
         case "admin":
-            return (severity.value = "success");
+            return "success";
         case "employee":
-            return (severity.value = "warning");
+            return "warning";
     }
 });
 </script>

@@ -13,18 +13,18 @@ const props = defineProps({
 const label = computed(() => {
     switch (props.value) {
         case true:
-            return (label.value = "Active");
+            return "Active";
         case false:
-            return (label.value = "Not Active");
+            return "Not Active";
     }
 });
 
 const severity = computed(() => {
     switch (props.value) {
         case true:
-            return (severity.value = "success");
+            return "success";
         case false:
-            return (severity.value = "danger");
+            return "danger";
     }
 });
 </script>

@@ -2,8 +2,10 @@
     <AdminLayout>
         <div>
             <RoomForm
+                :key="createFormKey"
                 :room-type-options="roomTypeOptions"
                 :room-status-options="roomStatusOptions"
+                @create="handleCreate"
             />
         </div>
         <DataTable :value="tableData">
@@ -42,10 +44,13 @@
                             :model="slots.data"
                             :room-type-options="roomTypeOptions"
                             :room-status-options="roomStatusOptions"
+                            @update="handleUpdate"
                         />
                         <DeleteDialog
                             :id="slots.data.id"
                             :label="slots.data.name"
+                            :route="`admin/rooms/${slots.data.id}`"
+                            @destroy="handleDelete(slots.data)"
                         />
                     </div>
                 </template>
@@ -55,41 +60,44 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import RoomState from "../../components/states/RoomState.vue";
 import RoomTypeState from "../../components/states/RoomTypeState.vue";
 import RoomForm from "../../components/forms/RoomForm.vue";
 import DeleteDialog from "../../components/dialogs/DeleteDialog.vue";
+import AdminRoomService from "../../services/admin/AdminRoomService";
 
-const tableData = ref([
-    {
-        id: 1,
-        name: "Room 1",
-        description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio quam consequatur aliquam sapiente suscipit adipisci nesciunt, modi doloribus alias aperiam, blanditiis assumenda quos, architecto fugiat? Consequatur, aspernatur? Nam, dolores perspiciatis!",
-        type: "signle",
-        type_text: "Signle",
-        status: "available",
-        status_text: "Available",
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-    {
-        id: 2,
-        name: "Room 2",
-        description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio quam consequatur aliquam sapiente suscipit adipisci nesciunt, modi doloribus alias aperiam, blanditiis assumenda quos, architecto fugiat? Consequatur, aspernatur? Nam, dolores perspiciatis!",
-        type: "signle",
-        type_text: "Signle",
-        status: "available",
-        status_text: "Available",
-        created_at: "2024-04-27",
-        updated_at: "منذ 7 ثواني",
-    },
-]);
+const tableData = ref([]);
+const roomTypeOptions = ref([]);
+const roomStatusOptions = ref([]);
+const createFormKey = ref(0);
 
-const roomTypeOptions = ref([{ label: "Signle ", value: "signle" }]);
-const roomStatusOptions = ref([{ label: "Available ", value: "available" }]);
+const handleCreate = (data) => {
+    tableData.value.push(data);
+    createFormKey.value++;
+};
+
+const handleUpdate = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value[index] = data;
+};
+
+const handleDelete = (data) => {
+    const index = tableData.value.findIndex(
+        (tableItem) => tableItem.id === data.id
+    );
+    tableData.value.splice(index, 1);
+};
+
+onMounted(() => {
+    AdminRoomService.getTableData().then((data) => {
+        roomTypeOptions.value = data.roomTypeOptions;
+        roomStatusOptions.value = data.roomStatusOptions;
+        tableData.value = data.tableData;
+    });
+});
 </script>

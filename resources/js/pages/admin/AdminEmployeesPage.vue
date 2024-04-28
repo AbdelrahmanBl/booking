@@ -2,6 +2,7 @@
     <AdminLayout>
         <div>
             <EmployeeForm
+                :key="createFormKey"
                 :employee-type-options="employeeTypeOptions"
                 @create="handleCreate"
             />
@@ -44,7 +45,7 @@
                             :id="slots.data.id"
                             :label="slots.data.name"
                             :route="`admin/employees/${slots.data.id}`"
-                            @destory="handleDelete(slots.data)"
+                            @destroy="handleDelete(slots.data)"
                         />
                     </div>
                 </template>
@@ -63,10 +64,14 @@ import DeleteDialog from "../../components/dialogs/DeleteDialog.vue";
 import ActivationState from "../../components/states/ActivationState.vue";
 import AdminEmployeeService from "../../services/admin/AdminEmployeeService";
 
-const employeeTypeOptions = ref([]);
 const tableData = ref([]);
+const employeeTypeOptions = ref([]);
+const createFormKey = ref(0);
 
-const handleCreate = (data) => tableData.value.push(data);
+const handleCreate = (data) => {
+    tableData.value.push(data);
+    createFormKey.value++;
+};
 
 const handleUpdate = (data) => {
     const index = tableData.value.findIndex(

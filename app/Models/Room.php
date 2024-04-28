@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\RoomStatus;
 use App\Enums\RoomType;
+use App\Traits\TimestampsFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Room extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        TimestampsFormat;
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +41,16 @@ class Room extends Model
     protected $casts = [
         'type' => RoomType::class,
         'status' => RoomStatus::class,
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'type_text',
+        'status_text',
     ];
 
     public function getTypeTextAttribute()

@@ -67,6 +67,9 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
+import AdminRoomService from "../../services/admin/AdminRoomService";
+
+const emits = defineEmits(["create", "update"]);
 
 const props = defineProps({
     model: Object,
@@ -93,7 +96,14 @@ const dialogHeader = computed(() =>
 );
 
 const submit = () => {
-    // ...
-    visible.value = false;
+    isEdit.value
+        ? AdminRoomService.updateRecord(props.model.id, form).then((data) => {
+              emits("update", data);
+              visible.value = false;
+          })
+        : AdminRoomService.createRecord(form).then((data) => {
+              emits("create", data);
+              visible.value = false;
+          });
 };
 </script>

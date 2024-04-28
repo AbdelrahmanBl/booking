@@ -14,11 +14,11 @@ const props = defineProps({
 const severity = computed(() => {
     switch (props.value) {
         case "available":
-            return (severity.value = "success");
+            return "success";
         case "booked":
-            return (severity.value = "danger");
+            return "danger";
         case "pending":
-            return (severity.value = "warning");
+            return "warning";
     }
 });
 </script>

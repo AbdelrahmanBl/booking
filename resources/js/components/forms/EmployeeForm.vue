@@ -30,7 +30,7 @@
                 <label class="mb-1" for="password">Password</label>
                 <InputText
                     id="password"
-                    type="text"
+                    type="password"
                     v-model="form.password"
                     placeholder="Enter employee password"
                 />
@@ -41,7 +41,7 @@
                 </label>
                 <InputText
                     id="password_confirmation"
-                    type="text"
+                    type="password"
                     v-model="form.password_confirmation"
                     placeholder="Enter employee password_confirmation"
                 />
@@ -113,6 +113,8 @@ const submit = () => {
     isEdit.value
         ? AdminEmployeeService.updateRecord(props.model.id, form).then(
               (data) => {
+                  form.password = null;
+                  form.password_confirmation = null;
                   emits("update", data);
                   visible.value = false;
               }
