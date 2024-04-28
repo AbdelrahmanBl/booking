@@ -19,7 +19,17 @@ async function logout() {
     })
 }
 
+async function register(data) {
+    return RequestHelper.post('client/register', data)
+    .then(() => Promise.resolve())
+    .catch(() => Promise.reject(() => {
+        data.password = ''
+        data.password_confirmation = ''
+    }))
+}
+
 export default {
     login,
     logout,
+    register,
 }

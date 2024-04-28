@@ -7,17 +7,28 @@
             <form @submit.prevent="register">
                 <div class="grid py-2">
                     <label class="mb-1" for="name">Name</label>
-                    <InputText id="name" type="text" v-model="form.name" />
+                    <InputText
+                        id="name"
+                        type="text"
+                        placeholder="Enter your name"
+                        v-model="form.name"
+                    />
                 </div>
                 <div class="grid py-2">
                     <label class="mb-1" for="email">Email</label>
-                    <InputText id="email" type="text" v-model="form.email" />
+                    <InputText
+                        id="email"
+                        type="text"
+                        placeholder="Enter your email"
+                        v-model="form.email"
+                    />
                 </div>
                 <div class="grid py-2">
                     <label class="mb-1" for="password">Password</label>
                     <InputText
                         id="password"
                         type="password"
+                        placeholder="Enter your password"
                         v-model="form.password"
                     />
                 </div>
@@ -28,11 +39,16 @@
                     <InputText
                         id="password_confirmation"
                         type="password"
+                        placeholder="Enter your password confirmation"
                         v-model="form.password_confirmation"
                     />
                 </div>
                 <div class="grid py-2">
-                    <Button label="Register" :loading="true" />
+                    <Button
+                        type="submit"
+                        label="Register"
+                        :loading="registerLoading"
+                    />
                 </div>
             </form>
         </AuthCard>
@@ -40,11 +56,14 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import AuthCard from "../../components/cards/AuthCard.vue";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
+import ClientAuthService from "../../services/client/ClientAuthService";
+import { useRouter } from "vue-router";
 
+const registerLoading = ref(false);
 const form = reactive({
     name: null,
     email: null,
@@ -52,7 +71,12 @@ const form = reactive({
     password_confirmation: null,
 });
 
+const router = useRouter();
+
 const register = () => {
-    // ..
+    registerLoading.value = true;
+    ClientAuthService.register(form)
+        .then(() => router.push({ name: "client.login" }))
+        .finally(() => (registerLoading.value = false));
 };
 </script>
