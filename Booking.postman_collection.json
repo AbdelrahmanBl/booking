@@ -1,0 +1,849 @@
+{
+	"info": {
+		"_postman_id": "24d49805-b2f0-4163-851d-9509b9e68c21",
+		"name": "Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9516188",
+		"_collection_link": "https://crimson-star-9882.postman.co/workspace/Asswaat~7807c2ba-4f7c-41ee-bb9a-7e25aaf12127/collection/9516188-24d49805-b2f0-4163-851d-9509b9e68c21?action=share&source=collection_link&creator=9516188"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "admin@booking.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/admin/login",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/logout",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Employees",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/employees",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test\",\n    \"email\": \"test@test.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"type\": \"employee\", // admin,employee\n    \"is_active\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/employees",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test\",\n    \"email\": \"test@test.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"type\": \"employee\", // admin,employee\n    \"is_active\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/employees/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"employees",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/employees/2",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"employees",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rooms",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/rooms",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"rooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Room 1\",\n    \"description\": \"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio quam consequatur aliquam sapiente suscipit adipisci nesciunt, modi doloribus alias aperiam, blanditiis assumenda quos, architecto fugiat? Consequatur, aspernatur? Nam, dolores perspiciatis!\",\n    \"type\": \"single\", // single,double,suite\n    \"status\": \"pending\", // available,booked,pending\n    \"price\": \"100\",\n    \"image\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/rooms",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"rooms"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Room 1\",\n    \"description\": \"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio quam consequatur aliquam sapiente suscipit adipisci nesciunt, modi doloribus alias aperiam, blanditiis assumenda quos, architecto fugiat? Consequatur, aspernatur? Nam, dolores perspiciatis!\",\n    \"type\": \"single\", // single,double,suite\n    \"status\": \"pending\", // available,booked,pending\n    \"price\": \"100\",\n    \"image\": \"iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAAA3NCSVQICAjb4U/gAAAAX3pUWHRSYXcgcHJvZmlsZSB0eXBlIEFQUDEAAAiZ40pPzUstykxWKCjKT8vMSeVSAANjEy4TSxNLo0QDAwMLAwgwNDAwNgSSRkC2OVQo0QAFmJibpQGhuVmymSmIzwUAT7oVaBst2IwAAAS9SURBVHic7ZxPaBxlFMDfm29mZ3aT3Q2BkCJa8VARBKG1aC4FJUVvpXjwIF6ECp6E0qvUntIYi6aKIKI9lh4E8WIPUaylORTrn1aQJmqaUizWP00z252dPzvf52G3m910k7fZ7Dcz4vudhmFn9n2/fe/N980Mi4dfWQFmY4y0A8g6LIiABRGwIAIWRMCCCFgQAQsiYEEELIiABRGwIAIWRMCCCFgQAQsiYEEELIiABRGwIAIWRGCmHQAENYgCtZ0zWDba+UGFs56UBfkePPeCtesxS8o+HRkGLvwcffV5pMlRmoKUAisHB18c2uZ5Hn8i98XpFdtBwIHE1UGqPUiBIQZzJmHitqp0Y7hJE7AgAhZEwIIIWBABCyJgQQQsiIAFEWgU5FWUjJvboQ+h39yWMXgVTfPewaNLUO2uOnSksGOnIWMIfZg8YE0esEIfZAw7HjIOHSkEnqZvHjBaBCkFso57J+w9E1YYKK+i9k06zz6f91wV+uqpfdbeCbs0ilLq+PIBo7cHxXGzlOJ6c1sBxDEAgGqzc+Fr/73pitZI+ibRJl0Pu+8PQ+V7Ge1KyQmSMTy6W7RadQcI2HYrx69lSFZCgqRUY+PijbdKO3cZatPh//N3/GThdnYcJT0PEiaCAgCIItW1ScsYHn4Eo+j/Kgju5c/uCbM8iup+Rwg67pz2jV5BUQh3/ly/s2Ho5VeHD77keHezkikboVfQM/ud6VPFld+7W2gvMewMxDSbWfTx+5XlpUhXfD2gV1BpxBgbF4FLBWHA4uX40sVg9Y5EhNID+M2XtWu/RQBw4Wz91s2YOB4gChXqKUztPahLl+mGIWD69WoUKUTIl+HMh8G1X+sAkMsDGsTQTx6vDI3o6ltZWc0jQnEMW1mQH+71idDslHv1h7qV0xWYdkHbzPzIB7XxxGl2yl24HOeHNV729D5ZdVdlxZW5Yv9neHq/OTbePZdOHq8s/KjXDugWdG7OP/NBMPpg9zEYPaTva4e7252dchOwA7oFWTkYGQe/2rGzMabTp6pXf6r3N8IEKqtF8i8vNEf13XwUBmBaWz4+mcpqkfRVTErVUGRZ2EuJraNxzUrMDiQmyDDwr1vx28fc64uy7+takpXVIrkMMgRcmY9zTp+HNytrKOmFbKI9yLK38OF2EzNH3eWFpHOngd4MEqI5JGGubfcCIkb3lqgzR93lRekknjsNtGQQIqBQ338bXLkUWTYaBsyfCxCgUMLWbfzNsQtw9tOgPGKcnwuu/yKdgo4we0JXiRWK+NGMZxdQCBAC5j4LASDnQK1KHgoAgAhSwifveHZe4xusvaCxBxWKa0XRR29G7DhDWqT/nnQ7fcyMdJMhQZYNf9yMldraxU43GRI0XMZ336w2NtKOZY0MCYKMqWmQiaLXdDt5IKQqCKHxAlEY0Dee0yLNEmtMdk4cc28sSSfVyc4mpFxipgU3lqQQ2Xqa2k76TVqkH8JmpJBBQgDc9yg1syT989kOXjwflcrG6m2V4hK0dzD5P5qUMfieysI6qxdSSHRDZGIV2iP/kU6QHiyIgAURsCACFkTAgghYEAELImBBBCyIgAURsCACFkTAgghYEAELImBBBCyIgAURsCACFkTwL2jgZffjZ5YEAAAAAElFTkSuQmCC\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/rooms/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"rooms",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/rooms/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"rooms",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Clients",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/users",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test test\",\n    \"email\": \"test@test.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"is_active\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/users",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test test\",\n    \"email\": \"test@test.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"is_active\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/users/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/users/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bookings",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/admin/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"bookings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"rejected\" // approved,rejected\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/admin/bookings/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"admin",
+										"bookings",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "test@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/client/login",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test\",\n    \"email\": \"test@test.com\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/client/register",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/client/logout",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Main Page",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/client/mainPage?search=&type=",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"mainPage"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "type",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "room",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/client/rooms/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"rooms",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bookings",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{domain}}/client/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"bookings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "room",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"room_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/client/bookings",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"client",
+										"bookings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
