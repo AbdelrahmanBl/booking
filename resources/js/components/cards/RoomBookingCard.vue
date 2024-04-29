@@ -4,7 +4,7 @@
         style="box-shadow: 0px 0px 3px 2px #ddd"
     >
         <router-link
-            :to="{ name: 'guest.rooms.show', params: { room: 1 } }"
+            :to="{ name: 'guest.rooms.show', params: { room: room.id } }"
             class="reset"
         >
             <div class="mb-3">
