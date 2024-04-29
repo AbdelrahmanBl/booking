@@ -13,4 +13,11 @@ trait EnumHandler
             'value' => $case,
         ]);
     }
+
+    public static function values()
+    {
+        return collect(static::cases())
+        ->map(fn($item) => $item->value)
+        ->toArray();
+    }
 }

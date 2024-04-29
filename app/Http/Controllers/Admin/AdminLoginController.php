@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminLoginRequest;
+use App\Services\LoginService;
 
 class AdminLoginController extends Controller
 {
@@ -12,13 +13,9 @@ class AdminLoginController extends Controller
      */
     public function __invoke(AdminLoginRequest $request)
     {
-        $guard = auth()->guard('admin');
-
-        $guard->attempt($request->validated());
-
-        if(! $guard->check()) {
-            return $this->errorResponse($request->all(), __('auth.failed'));
-        }
+        $guard = LoginService::make()
+        ->useAdminGuard()
+        ->login($request->validated());
 
         return $this->successResponse([
             'token' => $guard->user()->createToken('admin-token', ['admin'])->plainTextToken,

@@ -22,6 +22,9 @@
             <router-link :to="{ name: 'client.register' }" class="reset px-2">
                 Register
             </router-link>
+            <router-link :to="{ name: 'admin.login' }" class="reset px-2">
+                Admin Panel
+            </router-link>
         </div>
     </header>
     <section>
