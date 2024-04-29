@@ -12,13 +12,10 @@
                     {{ room.description }}
                 </div>
                 <div class="mb-2">
-                    <RoomTypeState
+                    <RoomTypeState :label="room.type_text" :value="room.type" />
+                    <RoomState
                         :label="room.status_text"
                         :value="room.status"
-                    />
-                    <RoomState
-                        :label="room.type_text"
-                        :value="room.type"
                         class="ml-1"
                     />
                 </div>
