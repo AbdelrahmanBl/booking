@@ -34,10 +34,11 @@ router.beforeEach((to, from, next) => {
     }
     // handle authed user hitting invalid authed route...
     else if(AuthHelper.isAuthUser() && to.meta.auth) {
-        if(to.name.search('admin.') > -1 && AuthHelper.isAuthClient()) {
+        console.log(to.name);
+        if(to.name.startsWith('admin.') && AuthHelper.isAuthClient()) {
             next({ name: 'client.home' })
         }
-        else if(to.name.search('client.') > -1 && AuthHelper.isAuthAdminOrEmployee()) {
+        else if(to.name.startsWith('client.') && AuthHelper.isAuthAdminOrEmployee()) {
             next({ name: 'admin.home' })
         }
         else {

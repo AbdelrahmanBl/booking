@@ -1,7 +1,11 @@
 <template>
     <GuestLayout>
         <div>
-            <img class="w-full h-[100vh]" :src="asset('booking.png')" alt="" />
+            <img
+                class="w-full md:h-[100vh] h-[60vh]"
+                :src="asset('booking.png')"
+                alt=""
+            />
         </div>
         <div class="website-width py-6">
             <div class="text-center font-bold text-2xl">Book A Room Now</div>
